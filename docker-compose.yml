@@ -1,0 +1,47 @@
+services:
+  db:
+    image: postgres:16
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend/app
+    container_name: fastapi_backend
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./backend:/app
+    environment:
+      DATABASE_URL: ${DB_URL}
+      
+    command: ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --reload --port 8000"]
+
+  frontend:
+    build: ./frontend
+    container_name: react_frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+    env_file:
+      - ./frontend/.env
+    volumes:
+      - /frontend
+      - /frontend/node_modules
+    command: ["npm", "run", "dev", "--", "--host"]
+
+volumes:
+  postgres_data:
