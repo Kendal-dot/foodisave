@@ -30,10 +30,21 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 app.include_router(router, prefix="/v1", tags=["v1"])
 
+# Uppdaterade origins för produktion
 origins = [
+    # Produktion - Vercel frontend
+    "https://foodisave.se",
+    "https://www.foodisave.se",
+    "http://foodisave.se",  # Om någon kommer via http
+    "http://www.foodisave.se",
+    
+    # Utveckling
     "http://localhost:3000",  # React app URL
     "http://localhost:8000",  # FastAPI app URL
-    "http://localhost:5173",  # Another development URL
+    "http://localhost:5173",  # Vite development URL
+    
+    # Om du har en staging miljö på Vercel
+    # "https://foodisave-staging.vercel.app",
 ]
 
 app.add_middleware(
@@ -43,4 +54,3 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
