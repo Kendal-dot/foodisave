@@ -52,7 +52,7 @@ export default function LoginForm( { redirectTo } ) {
       formData.append("password", password);
 
       try {
-        const response = await fetch(`${API_URL}/auth/token`, {
+        const response = await fetch(`${API_URL}/v1/auth/token`, {
           method: "POST",
           body: formData,
         });
@@ -65,7 +65,7 @@ export default function LoginForm( { redirectTo } ) {
           localStorage.setItem("token", data.access_token);
 
           // Hämta användardata från /me-endpoint
-          const meResponse = await fetch(`${API_URL}/me`, {
+          const meResponse = await fetch(`${API_URL}/v1/users/me`, {
             method: "GET",
             headers: {
               Authorization: `Bearer ${data.access_token}`,

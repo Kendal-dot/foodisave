@@ -16,7 +16,7 @@ export default function ReceptFörslag() {
     setError(null);
 
     try {
-      const response = await fetch(`${apiUrl}/suggest_recipes?ingredients=${encodeURIComponent(ingredients)}`);
+      const response = await fetch(`${apiUrl}/v1/ai/suggest_recipes?ingredients=${encodeURIComponent(ingredients)}`);
       if (!response.ok) {
         throw new Error("Något gick fel vid hämtning av receptförslag");
       }

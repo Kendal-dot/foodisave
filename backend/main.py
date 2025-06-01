@@ -35,8 +35,7 @@ origins = [
     # Produktion - Vercel frontend
     "https://foodisave.se",
     "https://www.foodisave.se",
-    "http://foodisave.se",  # Om någon kommer via http
-    "http://www.foodisave.se",
+    "https://foodisave-se.vercel.app",
     
     # Utveckling
     "http://localhost:3000",  # React app URL

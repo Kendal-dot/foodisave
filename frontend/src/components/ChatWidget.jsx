@@ -75,7 +75,7 @@ export default function ChatWidget({ isOpen, toggleChat }) {
     setMessage("");
 
     try {
-      const response = await fetch(`${apiUrl}/chat`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/v1/ai/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -93,7 +93,7 @@ export default function ChatWidget({ isOpen, toggleChat }) {
       ]);
 
       // Uppdatera användardata (och därmed credits) efter chatt-anropet
-      const userResponse = await fetch(`${import.meta.env.VITE_API_URL}/me`, {
+      const userResponse = await fetch(`${import.meta.env.VITE_API_URL}/v1/users/me`, {
         method: "GET",
         credentials: "include",
         headers: {

@@ -39,7 +39,7 @@ export default function ImageRecipe() {
     formData.append("file", selectedFile);
 
     try {
-      const response = await fetch(`${apiUrl}/suggest-recipe-from-plateimage`, {
+      const response = await fetch(`${apiUrl}/v1/ai/suggest-recipe-from-plateimage`, {
         method: "POST",
         body: formData,
         headers: {
@@ -62,7 +62,7 @@ export default function ImageRecipe() {
       setError(null);
       
       // Efter ett lyckat anrop, hämta den uppdaterade användardatan
-      const userResponse = await fetch(`${import.meta.env.VITE_API_URL}/me`, {
+      const userResponse = await fetch(`${import.meta.env.VITE_API_URL}/v1/users/me`, {
         method: "GET",
         credentials: "include",
         headers: { 

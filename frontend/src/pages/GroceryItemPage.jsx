@@ -31,7 +31,7 @@ export default function GroceryItems() {
     if (!token) return;
 
     try {
-      const response = await fetch(`${apiUrl}/saved-items`, {
+      const response = await fetch(`${apiUrl}/v1/grocery/saved-items`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -77,7 +77,7 @@ export default function GroceryItems() {
     formData.append("file", selectedFile);
 
     try {
-      const response = await fetch(apiUrl, {
+      const response = await fetch(`${apiUrl}/v1/grocery`, {
         method: "POST",
         body: formData,
         headers: {
@@ -93,7 +93,7 @@ export default function GroceryItems() {
       setItems(data.items || []);
       
       // Update user data after successful upload
-      const userResponse = await fetch(`${import.meta.env.VITE_API_URL}/me`, {
+      const userResponse = await fetch(`${import.meta.env.VITE_API_URL}/v1/users/me`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -118,7 +118,7 @@ export default function GroceryItems() {
   // Save item to database
   const saveItem = async (item) => {
     try {
-      const response = await fetch(`${apiUrl}/saved-items`, {
+      const response = await fetch(`${apiUrl}/v1/grocery/saved-items`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -154,7 +154,7 @@ export default function GroceryItems() {
     }
 
     try {
-      const response = await fetch(`${apiUrl}/saved-items`, {
+      const response = await fetch(`${apiUrl}/v1/grocery/saved-items`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -182,7 +182,7 @@ export default function GroceryItems() {
   // Delete item from database
   const deleteItem = async (itemId) => {
     try {
-      const response = await fetch(`${apiUrl}/saved-items/${itemId}`, {
+      const response = await fetch(`${apiUrl}/v1/grocery/saved-items/${itemId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -227,7 +227,7 @@ export default function GroceryItems() {
   // Update item in database
   const updateItem = async (itemId) => {
     try {
-      const response = await fetch(`${apiUrl}/saved-items/${itemId}`, {
+      const response = await fetch(`${apiUrl}/v1/grocery/saved-items/${itemId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

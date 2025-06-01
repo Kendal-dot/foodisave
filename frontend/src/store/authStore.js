@@ -31,7 +31,7 @@ const authStore = create((set, get) => ({
   fetchUser: async () => {
     const { token, logout, setUserData } = get(); // Accessing current state and actions
     try {
-      const response = await fetch(`${API_URL}/me`, {
+      const response = await fetch(`${API_URL}/v1/users/me`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

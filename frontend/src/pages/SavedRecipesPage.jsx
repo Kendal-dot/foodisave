@@ -20,7 +20,7 @@ const SavedRecipesPage = () => {
     
     try {
       // Fetch regular saved recipes
-      const recipeResponse = await fetch(`${BASE_API_URL}/saved/recipe`, {
+      const recipeResponse = await fetch(`${BASE_API_URL}/v1/recipes/saved/recipe`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -38,7 +38,7 @@ const SavedRecipesPage = () => {
       // Fetch saved user recipes (AI-generated recipes)
       let userRecipes = [];
       try {
-        const userRecipeResponse = await fetch(`${BASE_API_URL}/saved/user-recipe`, {
+        const userRecipeResponse = await fetch(`${BASE_API_URL}/v1/recipes/saved/user-recipe`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         
