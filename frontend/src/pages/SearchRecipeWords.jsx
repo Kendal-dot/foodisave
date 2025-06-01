@@ -54,7 +54,7 @@ export default function SearchRecipeWords() {
       params.append("page", pageNum);
       params.append("page_size", 20);
   
-      const response = await fetch(`${apiUrl}/v1/recipes/search/recipe?${params.toString()}`);
+      const response = await fetch(`${apiUrl}/search/recipe?${params.toString()}`);
   
       if (!response.ok) {
         if (response.status === 404) {

@@ -21,7 +21,7 @@ export default function DashboardUserPage() {
   async function fetchUserDetail() {
     setIsLoading(true);
     try {
-      const response = await fetch(`${BASE_API_URL}/v1/users/general/user/${userId}`, {
+      const response = await fetch(`${BASE_API_URL}/general/user/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

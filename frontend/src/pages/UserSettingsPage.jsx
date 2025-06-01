@@ -45,7 +45,7 @@ function UserSettingsPage() {
     setProfileMessage({ type: "", text: "" });
 
     try {
-      const response = await fetch(`${BASE_API_URL}/v1/user/profile`, {
+      const response = await fetch(`${BASE_API_URL}profile`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -95,7 +95,7 @@ function UserSettingsPage() {
     setPasswordMessage({ type: "", text: "" });
 
     try {
-      const response = await fetch(`${BASE_API_URL}/v1/auth/change-password`, {
+      const response = await fetch(`${BASE_API_URL}change-password`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -145,7 +145,7 @@ function UserSettingsPage() {
   // Funktion för att radera kontot
   const handleDeleteAccount = async () => {
     try {
-      const response = await fetch(`${BASE_API_URL}/v1/user`, {
+      const response = await fetch(`${BASE_API_URL}user`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

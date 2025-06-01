@@ -38,7 +38,7 @@ export default function ImageFoodRecipe() {
     formData.append("file", selectedFile);
 
     try {
-      const response = await fetch(`${apiUrl}/v1/ai/suggest-recipe-from-plateimage`, {
+      const response = await fetch(`${apiUrl}/suggest-recipe-from-plateimage`, {
         method: "POST",
         body: formData,
         headers: {
@@ -61,7 +61,7 @@ export default function ImageFoodRecipe() {
       setError(null);
 
       // Hämta uppdaterad användardata
-      const userResponse = await fetch(`${import.meta.env.VITE_API_URL}/v1/user/me`, {
+      const userResponse = await fetch(`${import.meta.env.VITE_API_URL}/me`, {
         method: "GET",
         credentials: "include",
         headers: { 

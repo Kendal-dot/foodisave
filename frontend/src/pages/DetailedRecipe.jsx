@@ -49,7 +49,7 @@ export default function DetailedRecipe() {
     setIsImageLoading(true);
     const fetchImage = async () => {
       try {
-        const response = await fetch(`${BASE_API_URL}/v1/files/images/${recipe.id}`, {
+        const response = await fetch(`${BASE_API_URL}/images/${recipe.id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!response.ok) {
@@ -72,7 +72,7 @@ export default function DetailedRecipe() {
     const checkIfSaved = async () => {
       if (!recipe.id) return;
       try {
-        const response = await fetch(`${BASE_API_URL}/v1/recipes/user-recipe/saved/check`, {
+        const response = await fetch(`${BASE_API_URL}/user-recipe/saved/check`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -102,7 +102,7 @@ export default function DetailedRecipe() {
       const formData = new FormData();
       formData.append("file", originalFile);
       formData.append("user_recipe_id", recipeId);
-      const response = await fetch(`${BASE_API_URL}/v1/files/upload-image/`, {
+      const response = await fetch(`${BASE_API_URL}/upload-image/`, {
         method: "POST",
         body: formData,
         headers: {
@@ -130,7 +130,7 @@ export default function DetailedRecipe() {
     if (recipeId) {
       try {
         if (saveStatus.saved) {
-          const response = await fetch(`${BASE_API_URL}/v1/recipes/user-recipe/saved`, {
+          const response = await fetch(`${BASE_API_URL}/user-recipe/saved`, {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
@@ -145,7 +145,7 @@ export default function DetailedRecipe() {
             throw new Error("Kunde inte ta bort receptet.");
           }
         } else {
-          const response = await fetch(`${BASE_API_URL}/v1/recipes/user-recipe/saved`, {
+          const response = await fetch(`${BASE_API_URL}/user-recipe/saved`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -190,7 +190,7 @@ export default function DetailedRecipe() {
           servings: servingsValue || 4,
         };
 
-        const response_1 = await fetch(`${BASE_API_URL}/v1/ai/recipe`, {
+        const response_1 = await fetch(`${BASE_API_URL}ai/recipe`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -205,7 +205,7 @@ export default function DetailedRecipe() {
         }
 
         const createdRecipe = await response_1.json();
-        const response_2 = await fetch(`${BASE_API_URL}/v1/recipes/user-recipe/saved`, {
+        const response_2 = await fetch(`${BASE_API_URL}/user-recipe/saved`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -22,7 +22,7 @@ export default function RecipeRoulette() {
       const params = new URLSearchParams();
       if (recipeType) params.append("recipe_type", recipeType);
 
-      const response = await fetch(`${apiUrl}/v1/recipes/random/recipe?${params.toString()}`);
+      const response = await fetch(`${apiUrl}/random/recipe?${params.toString()}`);
       if (!response.ok) {
         throw new Error("Inga recept hittades");
       }

@@ -102,7 +102,7 @@ export default function RegisterForm() {
       !termsError
     ) {
       try {
-        const response = await fetch(`${API_URL}/v1/user`, {
+        const response = await fetch(`${API_URL}user`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
