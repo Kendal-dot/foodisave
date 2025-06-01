@@ -62,7 +62,7 @@ export default function ImageRecipe() {
       setError(null);
       
       // Efter ett lyckat anrop, hämta den uppdaterade användardatan
-      const userResponse = await fetch(`${import.meta.env.VITE_API_URL}/v1/users/me`, {
+      const userResponse = await fetch(`${import.meta.env.VITE_API_URL}/v1/user/me`, {
         method: "GET",
         credentials: "include",
         headers: { 

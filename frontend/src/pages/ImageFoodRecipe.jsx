@@ -61,7 +61,7 @@ export default function ImageFoodRecipe() {
       setError(null);
 
       // Hämta uppdaterad användardata
-      const userResponse = await fetch(`${import.meta.env.VITE_API_URL}/v1/users/me`, {
+      const userResponse = await fetch(`${import.meta.env.VITE_API_URL}/v1/user/me`, {
         method: "GET",
         credentials: "include",
         headers: { 
