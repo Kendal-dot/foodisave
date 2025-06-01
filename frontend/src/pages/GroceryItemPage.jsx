@@ -75,38 +75,24 @@ export default function GroceryItems() {
     
     const formData = new FormData();
     formData.append("file", selectedFile);
-
+  
     try {
-      const response = await fetch(apiUrl, {
+      const response = await fetch(`${apiUrl}/save-bought-items`, {  // ← HÄR ÄR ÄNDRINGEN
         method: "POST",
         body: formData,
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-
+  
       if (!response.ok) {
         throw new Error("Kunde inte ladda upp bild");
       }
-
+  
       const data = await response.json();
       setItems(data.items || []);
       
-      // Update user data after successful upload
-      const userResponse = await fetch(`${import.meta.env.VITE_API_URL}/me`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      
-      if (userResponse.ok) {
-        const updatedUserData = await userResponse.json();
-        setUserData(updatedUserData);
-        localStorage.setItem("userData", JSON.stringify(updatedUserData));
-      }
+      // Resten av koden...
     } catch (err) {
       console.error("Error:", err);
       setError(err.message);
