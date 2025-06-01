@@ -84,51 +84,107 @@ export default function RegisterForm() {
 
   async function submitRegister(e) {
     e.preventDefault();
-    // Kör alla valideringsfunktioner
-    validateUserName();
-    validateEmail();
-    validatePassword();
-    validateFirstName();
-    validateLastName();
-    validateTerms();
-
-    // Om inga fel (observera att state-uppdateringar kan vara asynkrona)
-    if (
-      emailError.length === 0 &&
-      passwordError.length === 0 &&
-      firstNameError.length === 0 &&
-      lastNameError.length === 0 &&
-      userNameError.length === 0 &&
-      !termsError
-    ) {
-      try {
-        const response = await fetch(`${API_URL}/user`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            username: userName,
-            email,
-            first_name: firstName,
-            last_name: lastName,
-            password: password,
-          }),
-        });
-        const data = await response.json();
-
-        if (response.status === 201) {
-          console.log("Success");
-          // Vid lyckad registrering, vidarebefordra meddelandet till login-sidan
-          navigate("/login", { state: { activationMessage: data.message } });
-        } else {
-          console.log("Something went wrong");
-          console.log(data);
-          throw new Error("Ett oväntat fel uppstod. Försök igen senare.");
-        }
-      } catch (error) {
-        console.log(error);
-      }
+    
+    // Validera direkt utan att förlita sig på state
+    let hasErrors = false;
+    
+    // Validera username
+    if (!userName) {
+      setUserNameError(["Username is required"]);
+      hasErrors = true;
     } else {
-      console.log("Error in form");
+      setUserNameError([]);
+    }
+    
+    // Validera email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+      setEmailError(["E-postadress krävs"]);
+      hasErrors = true;
+    } else if (!emailRegex.test(email)) {
+      setEmailError(["Måste vara en giltig e-postadress"]);
+      hasErrors = true;
+    } else {
+      setEmailError([]);
+    }
+    
+    // Validera password
+    const passwordRegex = /[^a-zA-Z0-9]/;
+    let passwordErrors = [];
+    if (!password) {
+      passwordErrors.push("Lösenord krävs");
+      hasErrors = true;
+    } else {
+      if (password.length <= 8) {
+        passwordErrors.push("Lösenorder måste vara minst 8 tecken lång");
+        hasErrors = true;
+      }
+      if (!passwordRegex.test(password)) {
+        passwordErrors.push("Ditt lösenord måste innehålla minst en siffra eller specialtecken");
+        hasErrors = true;
+      }
+    }
+    setPasswordError(passwordErrors);
+    
+    // Validera förnamn
+    if (!firstName) {
+      setFirstNameError(["Ange ditt förnamn"]);
+      hasErrors = true;
+    } else {
+      setFirstNameError([]);
+    }
+    
+    // Validera efternamn
+    if (!lastName) {
+      setLastNameError(["Ange ditt efternamn"]);
+      hasErrors = true;
+    } else {
+      setLastNameError([]);
+    }
+    
+    // Validera terms
+    if (!terms) {
+      setTermsError("Acceptera användarvillkor och personuppgiftspolicy");
+      hasErrors = true;
+    } else {
+      setTermsError("");
+    }
+    
+    // Om vi har fel, avbryt
+    if (hasErrors) {
+      console.log("Validation errors found");
+      return;
+    }
+    
+    // Ingen fel, skicka request
+    try {
+      const response = await fetch(`${API_URL}/user`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: userName,
+          email,
+          first_name: firstName,
+          last_name: lastName,
+          password: password,
+        }),
+      });
+      const data = await response.json();
+  
+      if (response.status === 201) {
+        console.log("Success");
+        navigate("/login", { state: { activationMessage: data.message } });
+      } else {
+        console.log("Something went wrong");
+        console.log(data);
+        // Visa eventuella server-fel
+        if (data.detail) {
+          alert(data.detail);
+        }
+      }
+    } catch (error) {
+      console.log("Error:", error);
+      alert("Ett oväntat fel uppstod. Försök igen senare.");
     }
   }
 
