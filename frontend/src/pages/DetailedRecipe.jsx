@@ -190,7 +190,7 @@ export default function DetailedRecipe() {
           servings: servingsValue || 4,
         };
 
-        const response_1 = await fetch(`${BASE_API_URL}ai/recipe`, {
+        const response_1 = await fetch(`${BASE_API_URL}/ai/recipe`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
