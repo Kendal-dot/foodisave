@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import authStore from "../store/authStore";
 
 export default function LoginForm( { redirectTo } ) {
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL = import.meta.env.production.VITE_API_URL;
   const navigate = useNavigate();
   
   const { setToken } = authStore();
