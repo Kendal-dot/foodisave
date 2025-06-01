@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int
     PASSWORD_RESET_TOKEN_EXPIRE_MINUTES: int = 60
     POSTMARK_TOKEN: str
-    FRONTEND_BASE_URL: str = "http://localhost:5173"
+    FRONTEND_BASE_URL: str = "https://www.foodisave.se"
     AWS_ACCESS_KEY_ID: str
     AWS_SECRET_ACCESS_KEY: str
     AWS_BUCKET_NAME: str
