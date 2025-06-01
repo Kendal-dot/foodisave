@@ -38,9 +38,9 @@ origins = [
     "https://foodisave-se.vercel.app",
     
     # Utveckling
-    "http://localhost:3000",  # React app URL
-    "http://localhost:8000",  # FastAPI app URL
-    "http://localhost:5173",  # Vite development URL
+   # "http://localhost:3000",  # React app URL
+   # "http://localhost:8000",  # FastAPI app URL
+   # "http://localhost:5173",  # Vite development URL
     
     # Om du har en staging miljö på Vercel
     # "https://foodisave-staging.vercel.app",

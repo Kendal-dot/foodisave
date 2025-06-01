@@ -65,7 +65,7 @@ export default function LoginForm( { redirectTo } ) {
           localStorage.setItem("token", data.access_token);
 
           // Hämta användardata från /me-endpoint
-          const meResponse = await fetch(`${API_URL}/v1/user/me`, {
+          const meResponse = await fetch(`${API_URL}/v1/me`, {
             method: "GET",
             headers: {
               Authorization: `Bearer ${data.access_token}`,
